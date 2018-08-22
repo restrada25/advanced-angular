@@ -15,7 +15,7 @@ export class GitSearchService {
   constructor(private http: HttpClient) {
   }
 
-  gitSearch = (query: string) : Promise<GitSearch> => {
+  gitSearch = (query: string): Promise<GitSearch> => {
     const promise = new Promise<GitSearch>((resolve, reject) => {
         if (this.cachedSearches[query]) {
             resolve(this.cachedSearches[query]);
@@ -23,7 +23,7 @@ export class GitSearchService {
             this.http.get('https://api.github.com/search/repositories?q=' + query)
             .toPromise()
             .then( (response) => {
-                resolve(response as GitSearch)
+                resolve(response as GitSearch);
             }, (error) => {
                 reject(error);
             });
@@ -31,7 +31,7 @@ export class GitSearchService {
     });
     return promise;
   }
-  gitUsers = (query: string) : Promise<GitUsers> => {
+  gitUsers = (query: string): Promise<GitUsers> => {
     const promise = new Promise<GitUsers>((resolve, reject) => {
         if (this.cachedUsers[query]) {
             resolve(this.cachedUsers[query]);
@@ -39,7 +39,7 @@ export class GitSearchService {
             this.http.get('https://api.github.com/search/users?q=' + query)
             .toPromise()
             .then( (response) => {
-                resolve(response as GitUsers)
+                resolve(response as GitUsers);
             }, (error) => {
                 reject(error);
             });
