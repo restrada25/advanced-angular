@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { GitSearch } from './git-search';
 import { GitUsers } from './git-users';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class GitSearchService {
