@@ -38,7 +38,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [],
+  providers: [GitSearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
