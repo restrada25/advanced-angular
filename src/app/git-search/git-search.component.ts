@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GitSearchService } from '../git-search.service';
 import { GitSearch } from '../git-search';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-git-search',
   templateUrl: './git-search.component.html',
@@ -18,7 +18,14 @@ export class GitSearchComponent implements OnInit {
   formControls = {};
   constructor(private gitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router ) {
     this.modelKeys.forEach( (key) => {
-      this.formControls[key] = new FormControl();
+      const validators = [];
+      if (key === 'q') {
+        validators.push(Validators.required);
+      }
+      if (key === 'stars') {
+        validators.push(Validators.maxLength(4));
+      }
+      this.formControls[key] = new FormControl(this.model[key], validators);
     });
     this.form = new FormGroup(this.formControls);
 }
