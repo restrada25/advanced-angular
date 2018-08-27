@@ -15,13 +15,13 @@ export class GitSearchComponent implements OnInit {
   displayQuery: string;
   title: string;
   form: FormGroup;
-  formControls: {};
+  formControls = {};
   constructor(private gitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router ) {
     this.modelKeys.forEach( (key) => {
       this.formControls[key] = new FormControl();
     });
     this.form = new FormGroup(this.formControls);
-  }
+}
 
   model = new AdvancedSearchModel('', '', '', null, null, '');
   modelKeys = Object.keys(this.model);
@@ -47,7 +47,7 @@ export class GitSearchComponent implements OnInit {
 
   sendQuery = () => {
     this.searchResults = null;
-    const search: string = this.form.value.q;
+    const search: string = this.form.value['q'];
     let params = '';
     this.modelKeys.forEach( (elem) => {
       if (elem === 'q') {
@@ -59,7 +59,7 @@ export class GitSearchComponent implements OnInit {
     });
     this.searchQuery = search;
     if (params !== '') {
-      this.searchQuery = search + '+' + params;
+      this.searchQuery = search + params;
     }
     this.displayQuery = this.searchQuery;
     this.gitSearch();
