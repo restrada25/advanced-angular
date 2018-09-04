@@ -25,6 +25,7 @@ export class GitSearchComponent implements OnInit {
       if (key === 'stars') {
         validators.push(Validators.maxLength(4));
       }
+      validators.push(this.noSpecialChars);
       this.formControls[key] = new FormControl(this.model[key], validators);
     });
     this.form = new FormGroup(this.formControls);
@@ -32,6 +33,16 @@ export class GitSearchComponent implements OnInit {
 
   model = new AdvancedSearchModel('', '', '', null, null, '');
   modelKeys = Object.keys(this.model);
+
+  noSpecialChars(c: FormControl) {
+    const REGEXP = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+
+    return REGEXP.test(c.value) ? {
+        validateEmail: {
+        valid: false
+        }
+    } : null;
+}
 
   ngOnInit() {
     this.route.paramMap.subscribe( (params: ParamMap) => {
