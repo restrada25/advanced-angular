@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GitSearchService } from '../git-search.service';
 import { GitSearch } from '../git-search';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-git-search',
   templateUrl: './git-search.component.html',
@@ -13,7 +14,21 @@ export class GitSearchComponent implements OnInit {
   searchQuery: string;
   displayQuery: string;
   title: string;
-  constructor(private gitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router ) { }
+  form: FormGroup;
+  formControls = {};
+  constructor(private gitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router ) {
+    this.modelKeys.forEach( (key) => {
+      const validators = [];
+      if (key === 'q') {
+        validators.push(Validators.required);
+      }
+      if (key === 'stars') {
+        validators.push(Validators.maxLength(4));
+      }
+      this.formControls[key] = new FormControl(this.model[key], validators);
+    });
+    this.form = new FormGroup(this.formControls);
+}
 
   model = new AdvancedSearchModel('', '', '', null, null, '');
   modelKeys = Object.keys(this.model);
@@ -39,14 +54,14 @@ export class GitSearchComponent implements OnInit {
 
   sendQuery = () => {
     this.searchResults = null;
-    const search: string = this.model.q;
+    const search: string = this.form.value['q'];
     let params = '';
     this.modelKeys.forEach( (elem) => {
       if (elem === 'q') {
         return false;
       }
-      if (this.model[elem]) {
-        params += '+' + elem + ':' + this.model[elem];
+      if (this.form.value[elem]) {
+        params += '+' + elem + ':' + this.form.value[elem];
       }
     });
     this.searchQuery = search;
