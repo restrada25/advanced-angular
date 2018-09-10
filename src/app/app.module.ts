@@ -1,3 +1,5 @@
+import { UnifiedSearchService } from './unified-search.service';
+import { GitCodeSearchService } from './git-code-search.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [GitSearchService],
+  providers: [GitSearchService, GitCodeSearchService, UnifiedSearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

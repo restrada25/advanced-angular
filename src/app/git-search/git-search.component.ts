@@ -1,4 +1,5 @@
 import { AdvancedSearchModel } from './../advanced-search-model';
+import { UnifiedSearchService } from '../unified-search.service';
 import { Component, OnInit } from '@angular/core';
 import { GitSearchService } from '../git-search.service';
 import { GitSearch } from '../git-search';
@@ -13,7 +14,7 @@ export class GitSearchComponent implements OnInit {
   searchQuery: string;
   displayQuery: string;
   title: string;
-  constructor(private gitSearchService: GitSearchService, private route: ActivatedRoute, private router: Router ) { }
+  constructor(private unifiedSearchService: UnifiedSearchService, private route: ActivatedRoute, private router: Router ) { }
 
   model = new AdvancedSearchModel('', '', '', null, null, '');
   modelKeys = Object.keys(this.model);
@@ -30,8 +31,9 @@ export class GitSearchComponent implements OnInit {
   }
 
   gitSearch = () => {
-    this.gitSearchService.gitSearch(this.searchQuery).subscribe( (response) => {
-      this.searchResults = response;
+    this.unifiedSearchService.unifiedSearch(this.searchQuery).subscribe( (response) => {
+      console.log(response);
+      this.searchResults = response.repositories;
     }, (error) => {
       alert('Error: ' + error.statusText);
     });

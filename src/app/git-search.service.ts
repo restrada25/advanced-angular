@@ -3,7 +3,7 @@ import { GitSearch } from './git-search';
 import { GitUsers } from './git-users';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {publishReplay, map, refCount} from 'rxjs/operators';
+import {publishReplay, refCount} from 'rxjs/operators';
 
 @Injectable()
 export class GitSearchService {
@@ -19,8 +19,8 @@ export class GitSearchService {
   gitSearch: Function = (query: string): Observable<GitSearch> => {
     if (!this.search) {
       this.search = this.http.get<GitSearch>('https://api.github.com/search/repositories?q=' + query).pipe(
-      publishReplay(1),
-      refCount()
+        publishReplay(1),
+        refCount()
       );
       this.cachedValue = query;
     } else if (this.cachedValue !== query) {
