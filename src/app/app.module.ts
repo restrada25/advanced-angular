@@ -1,3 +1,5 @@
+import { CodeDisplayComponent } from './code-display/code-display.component';
+import { RepositoryDisplayComponent } from './repository-display/repository-display.component';
 import { UnifiedSearchService } from './unified-search.service';
 import { GitCodeSearchService } from './git-code-search.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,7 +34,9 @@ const appRoutes: Routes = [
     GitSearchComponent,
     HomePageComponent,
     NotFoundComponent,
-    NoSpecialCharsDirective
+    NoSpecialCharsDirective,
+    RepositoryDisplayComponent,
+    CodeDisplayComponent
   ],
   imports: [
     BrowserModule,
