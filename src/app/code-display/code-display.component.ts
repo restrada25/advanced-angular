@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GitCodeSearch } from '../git-code-search';
 
 @Component({
@@ -9,10 +9,19 @@ import { GitCodeSearch } from '../git-code-search';
 export class CodeDisplayComponent implements OnInit {
 
   @Input() searchResults: GitCodeSearch;
+  @Input() favorites: Array<number>;
+  @Output() updateFavorites = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  addFavorite = (item) => {
+    return this.updateFavorites.emit(item.id);
+  }
+
+  checkFavorite = (item) => {
+    return this.favorites.indexOf(item.id) > -1;
+  }
 }

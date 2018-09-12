@@ -22,10 +22,18 @@
 .description {
   font-size:18px;
 }
-.ng-valid:not(form)  {
-  border: 2px solid #42A948; /* green */
+.favorite_icon {
+  position: relative;
+  float: right;
+  bottom: 95px;
+  font-size: 36px;
+  cursor: pointer;
 }
-
-.ng-invalid:not(form)  {
-  border: 2px solid #a94442; /* red */
+.favorited {
+  color: yellow;
+  text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
