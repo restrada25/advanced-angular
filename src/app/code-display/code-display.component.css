@@ -1,3 +1,9 @@
+.total {
+  font-size:24px;
+}
+.list {
+  list-style-type: none;
+}
 .list_item {
   border:1px solid black;
   height: 165px;
@@ -15,4 +21,11 @@
 }
 .description {
   font-size:18px;
+}
+.ng-valid:not(form)  {
+  border: 2px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border: 2px solid #a94442; /* red */
 }

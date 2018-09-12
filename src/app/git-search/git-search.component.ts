@@ -15,6 +15,8 @@ export class GitSearchComponent implements OnInit {
   searchQuery: string;
   displayQuery: string;
   title: string;
+  favorites: Array<number> = [];
+
   constructor(private unifiedSearchService: UnifiedSearchService, private route: ActivatedRoute, private router: Router ) { }
 
   model = new AdvancedSearchModel('', '', '', null, null, '');
@@ -60,4 +62,11 @@ export class GitSearchComponent implements OnInit {
     this.gitSearch();
   }
 
+  checkType = (key) => {
+    return typeof key === 'string' ? 'text' : typeof key;
+  }
+
+  handleFavorite = (id) => {
+    return this.favorites.push(id);
+  }
 }
