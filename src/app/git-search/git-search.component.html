@@ -21,8 +21,8 @@
       <p class="description"> {{result.description}}</p>
       <p> Created On: {{result.created_at | date:'fullDate'}} </p>
     </li> -->
-    <app-repository-display [searchResults]="searchResults.repositories" [favorites]="favorites" (updateFavorites)="handleFavorite($event)" *ngIf="searchResults.repositories"></app-repository-display>
-    <app-code-display [searchResults]="searchResults.code" [favorites]="favorites" (updateFavorites)="handleFavorite($event)" *ngIf="searchResults.code"></app-code-display>
+    <app-repository-display [searchResults]="searchResults.repositories" [favorites]="favorites" (updateFavorites)="handleFavorite($event)" *ngIf="searchResults.repositories" appFade="true" ></app-repository-display>
+    <app-code-display [searchResults]="searchResults.code" [favorites]="favorites" (updateFavorites)="handleFavorite($event)" *ngIf="searchResults.code" appFade="true" ></app-code-display>
   </ul>
 </div>
 <ng-template #elseBlock>Loading...</ng-template>
